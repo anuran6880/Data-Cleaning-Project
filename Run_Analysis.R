@@ -1,4 +1,3 @@
-
 setwd("E:/Coursera/Getting and Cleaning Data/Project/UCI HAR Dataset")
 
 # Reading Training Data
@@ -47,6 +46,7 @@ master3=merge(master2,activities)
 names(master3)<-gsub("^t","time",names(master3))
 names(master3)<-gsub("^f","frequency",names(master3))
 names(master3)<-gsub("mag","magnitude",names(master3))
+names(master3)<-gsub("acc","acceleration",names(master3))
 names(master3)<-gsub("\\()","",names(master3))
 
 #Creating independent tidy dataset 
@@ -55,4 +55,4 @@ meltData=melt(master3, id=c("subject","activitydescription"))
 tidyData=dcast(meltData,subject+activitydescription~variable,mean)
 
 #Saving the file
-write.csv("tidyData.csv")
+write.table(tidyData,"tidyData.txt")
